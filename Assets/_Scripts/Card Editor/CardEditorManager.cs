@@ -22,6 +22,7 @@ public class CardEditorManager : MonoBehaviour {
 	public TMP_Text keywordListText;
 	public TMP_Text selectedRule;
 
+	public GameObject rulesPanel;
 	public GameObject conditionsPanel;
 	public GameObject effectsPanel;
 
@@ -62,8 +63,18 @@ public class CardEditorManager : MonoBehaviour {
 			OnKeywordSelected();
 		});
 
-		OnKeywordSelected ();
+		rulesList.onValueChanged.AddListener (delegate {
+			OnRuleSelected ();
+		});
 
+		ruleType.onValueChanged.AddListener (delegate {
+			OnRuleTypeSelected();	
+		});
+
+		OnKeywordSelected ();
+		UpdateKeywordListText ();
+
+		rulesList.ClearOptions ();
 
 	}
 
@@ -75,6 +86,11 @@ public class CardEditorManager : MonoBehaviour {
 
 		ToggleKeywordButtons ();
 		UpdateKeywordListText ();
+
+		AddRuleToCardCurrentKeyword ();
+		OnRuleSelected ();
+		ToggleRuleButtons ();
+
 	}
 
 	public void OnKeywordButtonClicked_Minus(){
@@ -83,14 +99,31 @@ public class CardEditorManager : MonoBehaviour {
 
 		ToggleKeywordButtons ();
 		UpdateKeywordListText ();
+
+		rulesPanel.gameObject.SetActive (false);
+
 	}
 
 	public void OnRuleButtonClicked_Plus(){
-		//FAZER ISSO FUNCIONAR
+		AddRuleToCardCurrentKeyword();
+		ToggleRuleButtons ();
 	}
 
 	public void OnRuleButtonClicked_Minus(){
-		//FAZER ISSO FUNCIONAR
+		
+		var k = FindCurrentKeywordOnCard ();
+		k.rules.Remove (k.rules[rulesList.value]);
+
+		var tempValue = rulesList.value;
+
+		rulesList.options.RemoveAt (tempValue);
+		rulesList.value = tempValue-1;
+
+		UpdateRulesListItemsText ();
+
+		ToggleRuleButtons ();
+
+		ruleType.value = (int)k.type;
 	}
 
 	void AddRuleToCardCurrentKeyword(){
@@ -100,13 +133,15 @@ public class CardEditorManager : MonoBehaviour {
 		k.rules = k.rules ?? new List<Rule>();
 
 		var newRule = new Rule ();
-		newRule.type = (Rule.RuleType)ruleType.value;
+		newRule.type = (Rule.RuleType)0;
 		k.rules.Add (newRule);
 
 		rulesList.AddOptions(new List<string> {"Rule ("+ k.rules.Count +")"});
 
 		AddAllConditionsToCardCurrentRule ();
 		AddAllEffectsToCardCurrentRule ();
+
+		rulesPanel.gameObject.SetActive (true);
 	}
 
 	void AddAllConditionsToCardCurrentRule(){
@@ -141,21 +176,44 @@ public class CardEditorManager : MonoBehaviour {
 
 	}
 
+	void ToggleRuleButtons(){
+		var hasMoreThanOneRule = CardHasMoreThanOneRule ();
+		btnRulesMinus.gameObject.SetActive (hasMoreThanOneRule);
+
+	}
+
 	void ToggleKeywordButtons(){
 		var hasKeyword = CardHasKeyword ();
-		btnKeywordMinus.gameObject.SetActive (hasKeyword);
 		btnKeywordPlus.gameObject.SetActive (!hasKeyword);
+		btnKeywordMinus.gameObject.SetActive (hasKeyword);
+
 	}
+
 
 	void OnKeywordSelected(){
 
 		ToggleKeywordButtons ();
 		selectedKeyword.text = keywordList.options[keywordList.value].text;
 
+		var k = FindCurrentKeywordOnCard ();
+		rulesPanel.gameObject.SetActive (k != null);
+
+
 	}
 
+	void OnRuleSelected(){
+		selectedRule.text = rulesList.options [rulesList.value].text;
+
+		ruleType.value = (int) FindCurrentRuleOnKeyword ().type;
+	}
+
+	void OnRuleTypeSelected(){
+		FindCurrentRuleOnKeyword ().type = (Rule.RuleType) ruleType.value;
+	}
+
+
 	void UpdateKeywordListText(){
-		keywordListText.text = "{";
+		keywordListText.text = "Keyword List {";
 
 		for (int i = 0; i < NewCard.keywords.Count; i++) {
 			
@@ -166,6 +224,16 @@ public class CardEditorManager : MonoBehaviour {
 		}
 
 		keywordListText.text += "}";
+	}
+
+	void UpdateRulesListItemsText(){
+		
+		int i = 0;
+
+		foreach (TMP_Dropdown.OptionData o in rulesList.options) {
+			o.text = "Rule (" + ++i + ")";
+		}
+
 	}
 
 	void PopulateOuterDropdowns(){
@@ -221,6 +289,10 @@ public class CardEditorManager : MonoBehaviour {
 
 	bool CardHasKeyword(){
 		return FindCurrentKeywordOnCard() != null;
+	}
+
+	bool CardHasMoreThanOneRule(){
+		return FindCurrentKeywordOnCard ().rules.Count > 1;
 	}
 
 }

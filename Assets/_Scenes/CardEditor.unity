@@ -10829,7 +10829,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1491688585}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1903060879}
+        m_MethodName: OnRuleButtonClicked_Plus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1491688585
@@ -12232,6 +12243,11 @@ Prefab:
       propertyPath: btnRulesMinus
       value: 
       objectReference: {fileID: 1810858202}
+    - target: {fileID: 114213690459277212, guid: be647a46a8ef9404883f32691d9373f6,
+        type: 2}
+      propertyPath: rulesPanel
+      value: 
+      objectReference: {fileID: 721575997}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be647a46a8ef9404883f32691d9373f6, type: 2}
   m_IsPrefabParent: 0
@@ -14451,7 +14467,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1810858203}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1903060879}
+        m_MethodName: OnRuleButtonClicked_Minus
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1810858203
