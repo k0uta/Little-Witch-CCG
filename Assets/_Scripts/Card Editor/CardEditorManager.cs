@@ -45,6 +45,7 @@ public class CardEditorManager : MonoBehaviour {
 
 		PopulateOuterDropdowns();
 
+		Initialize_UpperSection ();
 		Initialize_BottomSection ();
 	}
 	
@@ -53,6 +54,17 @@ public class CardEditorManager : MonoBehaviour {
 		
 	}
 		
+	void Initialize_UpperSection(){
+
+		cardType.onValueChanged.AddListener (delegate {
+			OnCardTypeSelected();
+		});
+	}
+
+	void OnCardTypeSelected(){
+
+		creatureType.gameObject.SetActive (cardType.value == (int)Card.CardType.Creature);
+	}
 
 
 	void Initialize_BottomSection(){
@@ -60,18 +72,19 @@ public class CardEditorManager : MonoBehaviour {
 		PopulateBottomDropdowns ();
 
 		keywordList.onValueChanged.AddListener (delegate {
-			OnKeywordSelected();
+			OnKeywordValueChanged();
 		});
 
 		rulesList.onValueChanged.AddListener (delegate {
-			OnRuleSelected ();
+			OnRuleValueChanged ();
 		});
 
 		ruleType.onValueChanged.AddListener (delegate {
-			OnRuleTypeSelected();	
+			OnRuleTypeValueChanged();
 		});
+			
 
-		OnKeywordSelected ();
+		OnKeywordValueChanged ();
 		UpdateKeywordListText ();
 
 		rulesList.ClearOptions ();
@@ -88,7 +101,7 @@ public class CardEditorManager : MonoBehaviour {
 		UpdateKeywordListText ();
 
 		AddRuleToCardCurrentKeyword ();
-		OnRuleSelected ();
+		OnRuleValueChanged ();
 		ToggleRuleButtons ();
 
 	}
@@ -154,7 +167,7 @@ public class CardEditorManager : MonoBehaviour {
 			var newCondition = new Condition();
 			newCondition.type = (Condition.ConditionType)0;
 			newCondition.compareType = (Condition.CompareType)0;
-			newCondition.valueToCompare = "-";
+			newCondition.valueToCompare = "";
 			r.conditions.Add (newCondition);
 		}
 
@@ -190,7 +203,7 @@ public class CardEditorManager : MonoBehaviour {
 	}
 
 
-	void OnKeywordSelected(){
+	void OnKeywordValueChanged(){
 
 		ToggleKeywordButtons ();
 		selectedKeyword.text = keywordList.options[keywordList.value].text;
@@ -201,14 +214,40 @@ public class CardEditorManager : MonoBehaviour {
 
 	}
 
-	void OnRuleSelected(){
+	void OnRuleValueChanged(){
 		selectedRule.text = rulesList.options [rulesList.value].text;
 
 		ruleType.value = (int) FindCurrentRuleOnKeyword ().type;
 	}
 
-	void OnRuleTypeSelected(){
+	void OnRuleTypeValueChanged(){
 		FindCurrentRuleOnKeyword ().type = (Rule.RuleType) ruleType.value;
+	}
+
+	public void OnConditionTypeValueChanged(){
+		// ARRUMAR ISSO CONSEGUINDO AQUI DENTRO REFERENCIAR QUEM É QUE FOI MUDADO DE FATO
+		//var c = FindCurrentRuleOnKeyword ().conditions [index];
+		//c.type = (Condition.ConditionType)conditionCellList [index].dropdownType1.value;
+	}
+
+	public void OnConditionCompareTypeValueChanged(){
+
+	}
+
+	public void OnConditionValueToCompareValueChanged(){
+
+	}
+
+	public void OnEffectTypeValueChanged(){
+
+	}
+
+	public void OnEffectTargetValueChanged(){
+		
+	}
+
+	public void OnEffectBaseValueChanged(){
+		
 	}
 
 
@@ -252,7 +291,7 @@ public class CardEditorManager : MonoBehaviour {
 			c.dropdownType1.ClearOptions ();
 			PopulateDropdown<Condition.ConditionType> (c.dropdownType1);
 
-			c.value.text = "-";
+			c.value.text = "";
 		}
 
 		foreach (EditorCell c in effectCellList) {

@@ -9,6 +9,9 @@ public class EditorCell : MonoBehaviour {
 	public TMP_Dropdown dropdownType2;
 	public TMP_InputField value;
 
+	public int CellIndex { get; set; }
+	public bool NotUsed { get; set; }
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,4 +21,5 @@ public class EditorCell : MonoBehaviour {
 	void Update () {
 		
 	}
+		
 }
