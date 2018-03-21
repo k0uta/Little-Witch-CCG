@@ -22,6 +22,7 @@ public class CardEditorManager : MonoBehaviour {
 	public TMP_Text keywordListText;
 	public TMP_Text selectedRule;
 
+	public GameObject EditorCellPrefab;
 	public GameObject rulesPanel;
 	public GameObject conditionsPanel;
 	public GameObject effectsPanel;
@@ -47,11 +48,6 @@ public class CardEditorManager : MonoBehaviour {
 
 		Initialize_UpperSection ();
 		Initialize_BottomSection ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
 	}
 		
 	void Initialize_UpperSection(){
@@ -139,6 +135,47 @@ public class CardEditorManager : MonoBehaviour {
 		ruleType.value = (int)k.type;
 	}
 
+	// FAZER OS BOTÕES DE +/- DE CONDIÇÃO E EFEITO
+	public void OnConditionButtonClicked_Plus(){
+		AddEditorCell (conditionCellList);
+	}
+
+	public void OnConditionButtonClicked_Minus(){
+		RemoveEditorCell (conditionCellList);
+	}
+
+	public void OnEffectButtonClicked_Plus(){
+		AddEditorCell (effectCellList);
+	}
+
+	public void OnEffectButtonClicked_Minus(){
+		RemoveEditorCell (effectCellList);
+	}
+
+	void AddEditorCell(List<EditorCell> listToUse){
+
+		//Picks the first Cell not being used and activates it.
+		foreach (EditorCell ec in listToUse) {
+			if (!ec.IsBeingUsed) {
+				ec.ToggleCell ();
+				return;
+			}
+		}
+
+	}
+
+	void RemoveEditorCell(List<EditorCell> listToUse){
+		
+		//Picks the last Cell being used and deactivates it.
+		for (int i = listToUse.Count-1; i >= 0; i--) {
+			if (listToUse [i].IsBeingUsed) {
+				listToUse [i].ToggleCell ();
+				return;
+			}
+		}
+
+	}
+
 	void AddRuleToCardCurrentKeyword(){
 		
 		var k = FindCurrentKeywordOnCard ();
@@ -156,7 +193,7 @@ public class CardEditorManager : MonoBehaviour {
 
 		rulesPanel.gameObject.SetActive (true);
 	}
-
+		
 	void AddAllConditionsToCardCurrentRule(){
 
 		var r = FindCurrentRuleOnKeyword();
@@ -183,7 +220,7 @@ public class CardEditorManager : MonoBehaviour {
 			var newEffect = new Effect();
 			newEffect.type = (Effect.EffectType)0;
 			newEffect.target = (Effect.EffectTargetType)0;
-			newEffect.baseValue = 0;
+			newEffect.effectValue = "";
 			r.effects.Add (newEffect);
 		}
 
@@ -224,31 +261,15 @@ public class CardEditorManager : MonoBehaviour {
 		FindCurrentRuleOnKeyword ().type = (Rule.RuleType) ruleType.value;
 	}
 
-	public void OnConditionTypeValueChanged(){
-		// ARRUMAR ISSO CONSEGUINDO AQUI DENTRO REFERENCIAR QUEM É QUE FOI MUDADO DE FATO
-		//var c = FindCurrentRuleOnKeyword ().conditions [index];
-		//c.type = (Condition.ConditionType)conditionCellList [index].dropdownType1.value;
+	public void OnConditionChanged(EditorCell cell){
+		cell.OnConditionChanged (FindCurrentRuleOnKeyword ().conditions, conditionCellList.FindIndex (x => x == cell));
 	}
-
-	public void OnConditionCompareTypeValueChanged(){
-
-	}
-
-	public void OnConditionValueToCompareValueChanged(){
-
-	}
-
-	public void OnEffectTypeValueChanged(){
-
-	}
-
-	public void OnEffectTargetValueChanged(){
 		
-	}
 
-	public void OnEffectBaseValueChanged(){
-		
+	public void OnEffectChanged(EditorCell cell){
+		cell.OnEffectChanged (FindCurrentRuleOnKeyword ().effects, effectCellList.FindIndex (x => x == cell));
 	}
+		
 
 
 	void UpdateKeywordListText(){
@@ -300,7 +321,7 @@ public class CardEditorManager : MonoBehaviour {
 			PopulateDropdown<Effect.EffectType> (c.dropdownType1);
 			PopulateDropdown <Effect.EffectTargetType> (c.dropdownType2);
 
-			c.value.text = "0";
+			c.value.text = "";
 		}
 
 	}

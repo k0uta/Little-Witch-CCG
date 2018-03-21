@@ -43,6 +43,6 @@ public class Effect {
 
 	public EffectType type;
 	public EffectTargetType target;
-	public int baseValue;
+	public string effectValue;
 
 }

@@ -1499,11 +1499,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1903060879}
-        m_MethodName: OnConditionValueToCompareValueChanged
-        m_Mode: 0
+        m_MethodName: OnConditionChanged
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1319907114}
+          m_ObjectArgumentAssemblyTypeName: EditorCell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -2188,11 +2188,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1903060879}
-        m_MethodName: OnConditionValueToCompareValueChanged
-        m_Mode: 3
+        m_MethodName: OnConditionChanged
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1319907114}
+          m_ObjectArgumentAssemblyTypeName: EditorCell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7551,11 +7551,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1903060879}
-        m_MethodName: OnConditionTypeValueChanged
-        m_Mode: 3
+        m_MethodName: OnConditionChanged
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1319907114}
+          m_ObjectArgumentAssemblyTypeName: EditorCell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -11269,7 +11269,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 10, y: -10}
-  m_SizeDelta: {x: 330, y: 40}
+  m_SizeDelta: {x: 280, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1520579612
 MonoBehaviour:
@@ -11321,11 +11321,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1903060879}
-        m_MethodName: OnEffectTypeValueChanged
-        m_Mode: 1
+        m_MethodName: OnEffectChanged
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 233289011}
+          m_ObjectArgumentAssemblyTypeName: EditorCell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12667,7 +12667,7 @@ GameObject:
   - component: {fileID: 1669133816}
   - component: {fileID: 1669133815}
   m_Layer: 5
-  m_Name: Dropdown_CTargetType
+  m_Name: Dropdown_ETargetType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12691,7 +12691,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 340, y: -10}
+  m_AnchoredPosition: {x: 290, y: -10}
   m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1669133815
@@ -12744,11 +12744,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1903060879}
-        m_MethodName: OnEffectTargetValueChanged
-        m_Mode: 1
+        m_MethodName: OnEffectChanged
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 233289011}
+          m_ObjectArgumentAssemblyTypeName: EditorCell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -12883,7 +12883,7 @@ GameObject:
   - component: {fileID: 1684260139}
   - component: {fileID: 1684260138}
   m_Layer: 5
-  m_Name: InputField_ValueToCompare
+  m_Name: InputField_BaseValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12905,8 +12905,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 440, y: -10}
-  m_SizeDelta: {x: 50, y: 40}
+  m_AnchoredPosition: {x: 390, y: -10}
+  m_SizeDelta: {x: 100, y: 40}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1684260138
 MonoBehaviour:
@@ -12994,11 +12994,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1903060879}
-        m_MethodName: OnEffectBaseValueChanged
-        m_Mode: 1
+        m_MethodName: OnEffectChanged
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 233289011}
+          m_ObjectArgumentAssemblyTypeName: EditorCell, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
