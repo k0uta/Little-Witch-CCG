@@ -22,7 +22,6 @@ public class CardEditorManager : MonoBehaviour {
 	public TMP_Text keywordListText;
 	public TMP_Text selectedRule;
 
-	public GameObject EditorCellPrefab;
 	public GameObject rulesPanel;
 	public GameObject conditionsPanel;
 	public GameObject effectsPanel;
@@ -53,11 +52,11 @@ public class CardEditorManager : MonoBehaviour {
 	void Initialize_UpperSection(){
 
 		cardType.onValueChanged.AddListener (delegate {
-			OnCardTypeSelected();
+			OnCardTypeValueChanged();
 		});
 	}
 
-	void OnCardTypeSelected(){
+	void OnCardTypeValueChanged(){
 
 		creatureType.gameObject.SetActive (cardType.value == (int)Card.CardType.Creature);
 	}
@@ -88,51 +87,42 @@ public class CardEditorManager : MonoBehaviour {
 	}
 
 	public void OnKeywordButtonClicked_Plus(){
-
-		var newKeyword = new Keyword ();
-		newKeyword.type = (Keyword.KeywordType)keywordList.value;
-		NewCard.keywords.Add (newKeyword);
+		AddSelectedKeywordToCard ();
 
 		ToggleKeywordButtons ();
 		UpdateKeywordListText ();
 
-		AddRuleToCardCurrentKeyword ();
-		OnRuleValueChanged ();
-		ToggleRuleButtons ();
-
+		OnRuleButtonClicked_Plus ();
 	}
 
 	public void OnKeywordButtonClicked_Minus(){
-
-		NewCard.keywords.Remove (FindCurrentKeywordOnCard());
+		RemoveCurrentKeywordFromCard ();
 
 		ToggleKeywordButtons ();
 		UpdateKeywordListText ();
 
 		rulesPanel.gameObject.SetActive (false);
-
 	}
 
 	public void OnRuleButtonClicked_Plus(){
-		AddRuleToCardCurrentKeyword();
+		
+		AddRuleToCurrentKeyword();
+
+		UpdateRulesList ();
+		OnRuleValueChanged ();
+
 		ToggleRuleButtons ();
+
 	}
 
 	public void OnRuleButtonClicked_Minus(){
 		
-		var k = FindCurrentKeywordOnCard ();
-		k.rules.Remove (k.rules[rulesList.value]);
-
-		var tempValue = rulesList.value;
-
-		rulesList.options.RemoveAt (tempValue);
-		rulesList.value = tempValue-1;
-
+		RemoveRuleFromCurrentKeyword ();
 		UpdateRulesListItemsText ();
-
+		OnRuleValueChanged ();
 		ToggleRuleButtons ();
 
-		ruleType.value = (int)k.type;
+
 	}
 
 	// FAZER OS BOTÕES DE +/- DE CONDIÇÃO E EFEITO
@@ -152,31 +142,22 @@ public class CardEditorManager : MonoBehaviour {
 		RemoveEditorCell (effectCellList);
 	}
 
-	void AddEditorCell(List<EditorCell> listToUse){
 
-		//Picks the first Cell not being used and activates it.
-		foreach (EditorCell ec in listToUse) {
-			if (!ec.IsBeingUsed) {
-				ec.ToggleCell ();
-				return;
-			}
-		}
-
-	}
-
-	void RemoveEditorCell(List<EditorCell> listToUse){
+	void AddSelectedKeywordToCard(){
 		
-		//Picks the last Cell being used and deactivates it.
-		for (int i = listToUse.Count-1; i >= 0; i--) {
-			if (listToUse [i].IsBeingUsed) {
-				listToUse [i].ToggleCell ();
-				return;
-			}
-		}
-
+		var newKeyword = new Keyword ();
+		newKeyword.type = (Keyword.KeywordType)keywordList.value;
+		NewCard.keywords.Add (newKeyword);
 	}
 
-	void AddRuleToCardCurrentKeyword(){
+	void RemoveCurrentKeywordFromCard(){
+		
+		NewCard.keywords.Remove (FindCurrentKeywordOnCard());
+
+	}
+		
+
+	void AddRuleToCurrentKeyword(){
 		
 		var k = FindCurrentKeywordOnCard ();
 
@@ -186,45 +167,119 @@ public class CardEditorManager : MonoBehaviour {
 		newRule.type = (Rule.RuleType)0;
 		k.rules.Add (newRule);
 
-		rulesList.AddOptions(new List<string> {"Rule ("+ k.rules.Count +")"});
+		AddConditionToCardRule (newRule);
+		AddEffectToCardRule (newRule);
 
-		AddAllConditionsToCardCurrentRule ();
-		AddAllEffectsToCardCurrentRule ();
+		rulesList.AddOptions(new List<string> {"Rule ("+ k.rules.Count +")"});
 
 		rulesPanel.gameObject.SetActive (true);
 	}
-		
-	void AddAllConditionsToCardCurrentRule(){
 
-		var r = FindCurrentRuleOnKeyword();
+	void RemoveRuleFromCurrentKeyword(){
+		
+		var k = FindCurrentKeywordOnCard ();
+		k.rules.Remove (k.rules[rulesList.value]);
+
+		var tempValue = rulesList.value;
+
+		rulesList.options.RemoveAt (tempValue);
+		rulesList.value = tempValue-1;
+		ruleType.value = (int)k.type;
+
+	}
+
+	void AddEditorCell(List<EditorCell> listToUse){
+
+		//Picks the first Cell not being used and activates it.
+		foreach (EditorCell ec in listToUse) {
+			if (!ec.IsBeingUsed) {
+				ec.ToggleCell (true);
+				AddConditionToCardRule (FindCurrentRuleOnKeyword ());
+				return;
+			}
+		}
+
+	}
+
+	void RemoveEditorCell(List<EditorCell> listToUse){
+
+		//Picks the last Cell being used and deactivates it.
+		for (int i = listToUse.Count-1; i >= 0; i--) {
+			if (listToUse [i].IsBeingUsed) {
+				listToUse [i].ToggleCell (false);
+				RemoveConditionFromCardRule(FindCurrentRuleOnKeyword(), i);
+				return;
+			}
+		}
+
+	}
+
+	void UpdateEditorsCells(){
+
+		var r = FindCurrentRuleOnKeyword ();
+
+		HideAllEditorsCells (conditionCellList);
+		HideAllEditorsCells (effectCellList);
+
+		for (int i = 0; i < r.conditions.Count; i++) {
+			int valueType1 = (int)r.conditions [i].type;
+			int valueType2 = (int)r.conditions [i].compareType;
+			string inputValue = (string)r.conditions [i].valueToCompare;
+
+			conditionCellList [i].ToggleCell (true);
+			conditionCellList [i].UpdateCellInfo(valueType1, valueType2, inputValue);
+
+		} 
+
+		for (int i = 0; i < r.effects.Count; i++) {
+			int valueType1 = (int)r.effects [i].type;
+			int valueType2 = (int)r.effects [i].targetType;
+			string inputValue = (string)r.effects [i].effectValue;
+
+			effectCellList [i].ToggleCell (true);
+			effectCellList [i].UpdateCellInfo(valueType1, valueType2, inputValue);
+		}
+
+
+	}
+
+	void HideAllEditorsCells(List<EditorCell> listToUse){
+
+		foreach (EditorCell ec in listToUse) {
+			ec.ToggleCell (false);
+		}
+
+	}
+		
+	void AddConditionToCardRule(Rule r){
+
 		r.conditions = r.conditions ?? new List<Condition> ();
 
-		for (int i = 0; i < 6; i++) {
-			
-			var newCondition = new Condition();
-			newCondition.type = (Condition.ConditionType)0;
-			newCondition.compareType = (Condition.CompareType)0;
-			newCondition.valueToCompare = "";
-			r.conditions.Add (newCondition);
-		}
+		var newCondition = new Condition();
+		newCondition.type = (Condition.ConditionType)0;
+		newCondition.compareType = (Condition.CompareType)0;
+		newCondition.valueToCompare = "";
+		r.conditions.Add (newCondition);
 
 	}
 
-	void AddAllEffectsToCardCurrentRule(){
+	void RemoveConditionFromCardRule(Rule r, int index){
+		r.conditions.RemoveAt (index);
+	}
+		
+	void AddEffectToCardRule(Rule r){
 
-		var r = FindCurrentRuleOnKeyword();
 		r.effects = r.effects ?? new List<Effect> ();
 
-		for (int i = 0; i < 6; i++) {
-
-			var newEffect = new Effect();
-			newEffect.type = (Effect.EffectType)0;
-			newEffect.target = (Effect.EffectTargetType)0;
-			newEffect.effectValue = "";
-			r.effects.Add (newEffect);
-		}
+		var newEffect = new Effect();
+		newEffect.type = (Effect.EffectType)0;
+		newEffect.targetType = (Effect.EffectTargetType)0;
+		newEffect.effectValue = "";
+		r.effects.Add (newEffect);
 
 	}
+
+
 
 	void ToggleRuleButtons(){
 		var hasMoreThanOneRule = CardHasMoreThanOneRule ();
@@ -248,14 +303,22 @@ public class CardEditorManager : MonoBehaviour {
 		var k = FindCurrentKeywordOnCard ();
 		rulesPanel.gameObject.SetActive (k != null);
 
+		if (k != null) {
+			UpdateRulesList ();
+		}
 
 	}
+		
 
 	void OnRuleValueChanged(){
-		selectedRule.text = rulesList.options [rulesList.value].text;
 
-		ruleType.value = (int) FindCurrentRuleOnKeyword ().type;
+		var r = FindCurrentRuleOnKeyword ();
+		selectedRule.text = rulesList.options [rulesList.value].text;
+		ruleType.value = (int) r.type;
+
+		UpdateEditorsCells ();
 	}
+		
 
 	void OnRuleTypeValueChanged(){
 		FindCurrentRuleOnKeyword ().type = (Rule.RuleType) ruleType.value;
@@ -284,6 +347,22 @@ public class CardEditorManager : MonoBehaviour {
 		}
 
 		keywordListText.text += "}";
+	}
+
+	void UpdateRulesList(){
+		rulesList.ClearOptions ();
+
+		var listToAdd = new List<string> ();
+
+		int i = 0;
+		foreach (Rule r in FindCurrentKeywordOnCard().rules) {
+			listToAdd.Add ("Rule (" + ++i + ")");
+		}
+		rulesList.AddOptions (listToAdd);
+		UpdateRulesListItemsText ();
+		rulesList.value = 0;
+
+
 	}
 
 	void UpdateRulesListItemsText(){
@@ -319,7 +398,7 @@ public class CardEditorManager : MonoBehaviour {
 			c.dropdownType1.ClearOptions ();
 			c.dropdownType2.ClearOptions ();
 			PopulateDropdown<Effect.EffectType> (c.dropdownType1);
-			PopulateDropdown <Effect.EffectTargetType> (c.dropdownType2);
+			PopulateDropdown<Effect.EffectTargetType> (c.dropdownType2);
 
 			c.value.text = "";
 		}

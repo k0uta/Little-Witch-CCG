@@ -42,7 +42,7 @@ public class Effect {
 	}
 
 	public EffectType type;
-	public EffectTargetType target;
+	public EffectTargetType targetType;
 	public string effectValue;
 
 }

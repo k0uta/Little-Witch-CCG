@@ -13,10 +13,13 @@ public class EditorCell : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		ToggleCell ();
+		ToggleCell (false);
 	}
 
 	public void OnConditionChanged(List<Condition> conditions, int cellIndex){
+		
+		//Saves changed Condition into Rule
+
 		var c = conditions [cellIndex];
 		c.type = (Condition.ConditionType)dropdownType1.value;
 		c.compareType = (Condition.CompareType)dropdownType2.value;
@@ -24,15 +27,30 @@ public class EditorCell : MonoBehaviour {
 	}
 
 	public void OnEffectChanged(List<Effect> effects, int cellIndex){
+		
+		//Saves changed Effect into Rule
+
 		var e = effects [cellIndex];
 		e.type = (Effect.EffectType)dropdownType1.value;
-		e.target = (Effect.EffectTargetType)dropdownType2.value;
+		e.targetType = (Effect.EffectTargetType)dropdownType2.value;
 		e.effectValue = value.text;
 	}
 
-	public void ToggleCell(){
-		this.gameObject.SetActive (!gameObject.activeSelf);
+	public void ToggleCell(bool value){
+		this.gameObject.SetActive (value);
 		IsBeingUsed = gameObject.activeSelf;
 	}
-		
+
+	public void UpdateCellInfo(int indexType1, int indexType2, string inputValue){
+		dropdownType1.value = indexType1;
+		dropdownType2.value = indexType2;
+		value.text = inputValue;
+	}
+
+	public void ResetCellInfo(){
+		dropdownType1.value = 0;
+		dropdownType2.value = 0;
+		value.text = "";
+		IsBeingUsed = false;
+	}
 }
