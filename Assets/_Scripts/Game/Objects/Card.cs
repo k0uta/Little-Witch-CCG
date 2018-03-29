@@ -41,6 +41,8 @@ public class Card : ScriptableObject {
 		Stunned,
 	}
 
+	public int cardId;
+
 	public Sprite art;
 	public new string name;
 
@@ -53,7 +55,7 @@ public class Card : ScriptableObject {
 	public int energyLimit;
 
 
-	//RUNTIME VARIABLES
+	//RUNTIME VARIABLES FOR IN-GAME CARD
 	public CardPlayedFrom PlayedFrom { get; set; }
 	public int CurrentEnergy { get; set; }
 	public List<CardMark> Marks { get; set; }

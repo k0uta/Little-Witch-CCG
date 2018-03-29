@@ -1,26 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
-static public class CardManager{
+static public class CardManager {
+
 	/*
-	static public Card Create_Card(string name,
+	static public Card Create_New_Card(string name,
 						string flavorText,
 						Card.CardType type,
 						string creatureType,
-						List<Keyword> keywords){
+						List<Keyword> keywords,
+						Sprite art){
 
 		var newCard = new Card();
 
-		newCard.Name = name;
-		newCard.FlavorText = flavorText;
-		newCard.Type = type;
-		newCard.CreatureType = creatureType;
+		newCard.cardId = 0; // GET NEXT SEQUENCIAL
+		newCard.art = art;
+
+		newCard.name = name;
 
 		newCard.PlayedFrom = Card.CardPlayedFrom.Hand;
 		newCard.CurrentEnergy = 0;
 		newCard.Marks = new List<Card.CardMark>();
 
-		newCard.Keywords = keywords;
 
 		return newCard;
 

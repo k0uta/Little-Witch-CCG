@@ -5,16 +5,18 @@ using System.Collections.Generic;
 public class Condition {
 
 	public enum ConditionType{
-		Always_True,		
+		Always_True,
+		Decision_By_Player,
 
 		Card_Is_Of_Type,
 		Number_Of_Card_Type_In_Play,
 
 		Card_Name_Is,
-		Card_In_Control,
+		Card_Name_In_Control,
 		
 		Card_Name_On_Field,
 		Card_Creature_Type_On_Field,
+		Card_Creature_Type_On_Field_Count, // Adicionar um valueToCompare secundário pra esse funcionar
 
 		Card_Was_Played_From,
 
@@ -26,7 +28,7 @@ public class Condition {
 		Card_Current_Power_Is,
 
 
-		// DESTRINCHAR TODOS OS ATRIBUTOS DO JOGO
+		// DESTRINCHAR TODAS AS REGRAS DO JOGO
 	}
 
 	public enum CompareType{		
@@ -40,6 +42,6 @@ public class Condition {
 		
 	public ConditionType type;
 	public CompareType compareType;
-	public string valueToCompare;
+	public int valueToCompare;
 
 }

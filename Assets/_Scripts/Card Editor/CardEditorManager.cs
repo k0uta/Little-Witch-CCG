@@ -224,7 +224,7 @@ public class CardEditorManager : MonoBehaviour {
 		for (int i = 0; i < r.conditions.Count; i++) {
 			int valueType1 = (int)r.conditions [i].type;
 			int valueType2 = (int)r.conditions [i].compareType;
-			string inputValue = (string)r.conditions [i].valueToCompare;
+			int inputValue = (int)r.conditions [i].valueToCompare;
 
 			conditionCellList [i].ToggleCell (true);
 			conditionCellList [i].UpdateCellInfo(valueType1, valueType2, inputValue);
@@ -234,7 +234,7 @@ public class CardEditorManager : MonoBehaviour {
 		for (int i = 0; i < r.effects.Count; i++) {
 			int valueType1 = (int)r.effects [i].type;
 			int valueType2 = (int)r.effects [i].targetType;
-			string inputValue = (string)r.effects [i].effectValue;
+			int inputValue = (int)r.effects [i].effectValue;
 
 			effectCellList [i].ToggleCell (true);
 			effectCellList [i].UpdateCellInfo(valueType1, valueType2, inputValue);
@@ -258,7 +258,7 @@ public class CardEditorManager : MonoBehaviour {
 		var newCondition = new Condition();
 		newCondition.type = (Condition.ConditionType)0;
 		newCondition.compareType = (Condition.CompareType)0;
-		newCondition.valueToCompare = "";
+		newCondition.valueToCompare = -1;
 		r.conditions.Add (newCondition);
 
 	}
@@ -274,7 +274,7 @@ public class CardEditorManager : MonoBehaviour {
 		var newEffect = new Effect();
 		newEffect.type = (Effect.EffectType)0;
 		newEffect.targetType = (Effect.EffectTargetType)0;
-		newEffect.effectValue = "";
+		newEffect.effectValue = 0;
 		r.effects.Add (newEffect);
 
 	}

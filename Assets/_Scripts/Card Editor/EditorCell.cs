@@ -23,7 +23,7 @@ public class EditorCell : MonoBehaviour {
 		var c = conditions [cellIndex];
 		c.type = (Condition.ConditionType)dropdownType1.value;
 		c.compareType = (Condition.CompareType)dropdownType2.value;
-		c.valueToCompare = value.text;
+		c.valueToCompare = int.Parse(value.text);
 	}
 
 	public void OnEffectChanged(List<Effect> effects, int cellIndex){
@@ -33,7 +33,7 @@ public class EditorCell : MonoBehaviour {
 		var e = effects [cellIndex];
 		e.type = (Effect.EffectType)dropdownType1.value;
 		e.targetType = (Effect.EffectTargetType)dropdownType2.value;
-		e.effectValue = value.text;
+		e.effectValue = int.Parse(value.text);
 	}
 
 	public void ToggleCell(bool value){
@@ -41,10 +41,10 @@ public class EditorCell : MonoBehaviour {
 		IsBeingUsed = gameObject.activeSelf;
 	}
 
-	public void UpdateCellInfo(int indexType1, int indexType2, string inputValue){
+	public void UpdateCellInfo(int indexType1, int indexType2, int inputValue){
 		dropdownType1.value = indexType1;
 		dropdownType2.value = indexType2;
-		value.text = inputValue;
+		value.text = inputValue.ToString();
 	}
 
 	public void ResetCellInfo(){
