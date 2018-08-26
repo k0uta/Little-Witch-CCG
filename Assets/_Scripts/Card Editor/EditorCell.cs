@@ -5,6 +5,7 @@ using TMPro;
 
 public class EditorCell : MonoBehaviour {
 
+	/*
 	public TMP_Dropdown dropdownType1;
 	public TMP_Dropdown dropdownType2;
 	public TMP_InputField value;
@@ -53,4 +54,6 @@ public class EditorCell : MonoBehaviour {
 		value.text = "";
 		IsBeingUsed = false;
 	}
+
+*/
 }

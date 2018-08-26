@@ -1,0 +1,11 @@
+Key,English,
+arvoreta_name,Arvoreta,
+arvoreta_description,"*%{plant}*
+*%{cant_attack}*
+*%{token}*
+
+*%{special}*
+Não pode ser substituída por outra criatura.
+
+*%{cycle}*
+Adicione 1%{e_icon} em %{self_name}.",

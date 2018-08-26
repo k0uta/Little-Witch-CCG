@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 
 public class CardEditorManager : MonoBehaviour {
-
+	/*
 	public TMP_InputField cardName;
 	public TMP_InputField cardDescription;
 
@@ -362,6 +362,8 @@ public class CardEditorManager : MonoBehaviour {
 		UpdateRulesListItemsText ();
 		rulesList.value = 0;
 
+		// TODO: ATUALIZAR CONDITIONS E EFFECTS
+
 
 	}
 
@@ -378,7 +380,7 @@ public class CardEditorManager : MonoBehaviour {
 	void PopulateOuterDropdowns(){
 
 		PopulateDropdown<Card.CardType> (cardType);
-		PopulateDropdown<Card.CardCreatureType> (creatureType);
+		PopulateDropdown<Card.CardSubType> (creatureType);
 		PopulateDropdown<Card.CardQuality> (cardQuality);
 		PopulateDropdown<Rule.RuleType> (ruleType);
 		PopulateDropdown<Keyword.KeywordType> (keywordList);
@@ -433,5 +435,5 @@ public class CardEditorManager : MonoBehaviour {
 	bool CardHasMoreThanOneRule(){
 		return FindCurrentKeywordOnCard ().rules.Count > 1;
 	}
-
+*/
 }

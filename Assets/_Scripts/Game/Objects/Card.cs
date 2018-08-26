@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 [CreateAssetMenuAttribute(fileName = "New Card", menuName = "CCG/Card", order = 0)]
 public class Card : ScriptableObject {
 
@@ -12,12 +13,17 @@ public class Card : ScriptableObject {
 		Hero,
 	}
 
-	public enum CardCreatureType{
+	public enum CardSubType{
 		Plant,
 		Insect,
 		Ethereal,
 		Elemental,
 		Machine,
+	}
+
+	public enum CardModifier{
+		Cant_Attack,
+		Token,
 	}
 
 	public enum CardSet{
@@ -40,22 +46,30 @@ public class Card : ScriptableObject {
 	public enum CardMark{
 		Stunned,
 	}
-
+		
 	public int cardId;
 
-	public Sprite art;
+
+	public string art;
+	public Sprite Art { get; set; }
+
 	public new string name;
 
 	[SerializeField, Multiline]
 	public string descripion;
-	public CardType type;
-	public CardCreatureType creatureType;
-	public List<Keyword> keywords;
+
 
 	public int energyLimit;
 
 
-	//RUNTIME VARIABLES FOR IN-GAME CARD
+	public CardType type;
+	public CardSubType subType;
+	public List<Keyword> keywords;
+
+
+
+
+	//TODO: RUNTIME VARIABLES FOR IN-GAME CARD
 	public CardPlayedFrom PlayedFrom { get; set; }
 	public int CurrentEnergy { get; set; }
 	public List<CardMark> Marks { get; set; }

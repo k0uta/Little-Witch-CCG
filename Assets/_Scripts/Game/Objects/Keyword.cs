@@ -11,10 +11,10 @@ public class Keyword {
 		Cycle_Begin, // At the begnning of a turn
 		Bound, // When another Card enters the Field
 		Energize, // When Card is given Power
-		Conduit, // When a Spell is played
+		Resonance, // When a Spell is played
 		Learn, // When a Player draws a Card
 		Aura, // Active at all times on Field (not exactly a Keyword?)
-		Special, // Breakes a game rule
+		Special, // Breakes a game rule (makes no sense in here)
 	}
 		
 	public KeywordType type;

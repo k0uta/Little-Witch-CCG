@@ -6,6 +6,8 @@ public class Effect {
 
 	public enum EffectType{
 		Deck_Draw,
+		Deck_Search_Card_By_Player_To_Hand,
+		Deck_Search_Card_By_Player_To_Field,
 		Deck_Search_Card_By_Id_To_Hand,
 		Deck_Search_Card_By_Id_To_Field,
 		Deck_Shuffle,
@@ -17,6 +19,8 @@ public class Effect {
 		Hand_Discard,
 		Hand_Reveal,
 
+		DiscardPile_Search_Card_By_Player_To_Hand,
+		DiscardPile_Search_Card_By_Player_To_Field,
 		DiscardPile_Search_Card_By_Id_To_Hand,
 		DiscardPile_Search_Card_By_Id_To_Field,
 		DiscardPile_Draw,
@@ -51,6 +55,6 @@ public class Effect {
 
 	public EffectType type;
 	public EffectTargetType targetType;
-	public int effectValue;
+	public string effectValue;
 
 }

@@ -20,8 +20,8 @@ public class Condition {
 
 		Card_Was_Played_From,
 
-		Card_Name_Already_Played,
-		Card_Type_Already_Played,
+		Card_Name_Is_Played,
+		Card_Type_Is_Played,
 
 		Card_Has_Mark,
 
@@ -42,6 +42,6 @@ public class Condition {
 		
 	public ConditionType type;
 	public CompareType compareType;
-	public int valueToCompare;
+	public string valueToCompare;
 
 }
