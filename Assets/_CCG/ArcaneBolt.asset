@@ -9,25 +9,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: feac6431fa298774abf7452fd92d059a, type: 3}
-  m_Name: Avocud
+  m_Name: ArcaneBolt
   m_EditorClassIdentifier: 
-  cardId: 1
-  energyLimit: 2
-  type: 0
+  cardId: 0
+  energyLimit: 0
+  type: 1
   subTypes: 
   modifiers: 
   keywords:
-  - type: 3
+  - type: 0
     rules:
-    - type: 1
-      conditions:
-      - type: 3
-        compareType: 0
-        valueToCompare: Plant
-      - type: 3
-        compareType: 0
-        valueToCompare: Insect
+    - type: 3
+      conditions: []
       effects:
-      - type: 12
+      - type: 19
+        targetType: 5
+        effectValue: 3
+      - type: 21
         targetType: 1
         effectValue: 1
+      - type: 0
+        targetType: 4
+        effectValue: 1
+      - type: 17
+        targetType: 4
+        effectValue: 1
+  - type: 0
+    rules:
+    - type: 0
+      conditions: []
+      effects:
+      - type: 19
+        targetType: 4
+        effectValue: 2

@@ -15,7 +15,7 @@ public class Effect {
 		Deck_Place_Cards_Top,
 		Deck_Place_Cards_Bottom,
 
-		Hand_Play,
+		Hand_Play_Type_To_Field,
 		Hand_Discard,
 		Hand_Reveal,
 
@@ -46,6 +46,7 @@ public class Effect {
 
 	public enum EffectTargetType{
 		Self,
+		Card_By_Choice,
 		Card_By_Type,
 		Card_By_Name,
 		Controller,
@@ -55,6 +56,6 @@ public class Effect {
 
 	public EffectType type;
 	public EffectTargetType targetType;
-	public string effectValue;
+	public List<string> effectValues;
 
 }

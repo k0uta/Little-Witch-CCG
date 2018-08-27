@@ -7,8 +7,7 @@ public class Keyword {
 	public enum KeywordType{
 		Appear, //Enters the Field
 		Disappear, // Leaves the Field
-		Cycle_End, // At the end of a turn
-		Cycle_Begin, // At the begnning of a turn
+		Cycle, // At the end of a turn
 		Bound, // When another Card enters the Field
 		Energize, // When Card is given Power
 		Resonance, // When a Spell is played

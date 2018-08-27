@@ -23,6 +23,7 @@ public class Card : ScriptableObject {
 
 	public enum CardModifier{
 		Cant_Attack,
+		Cant_Be_Swaped,
 		Token,
 	}
 
@@ -50,22 +51,16 @@ public class Card : ScriptableObject {
 	public int cardId;
 
 
-	public string art;
 	public Sprite Art { get; set; }
-
-	public new string name;
-
-	[SerializeField, Multiline]
-	public string descripion;
-
+	public string Name { get; set; }
+	public string Description { get; set; }
 
 	public int energyLimit;
 
-
 	public CardType type;
-	public CardSubType subType;
+	public List<CardSubType> subTypes;
+	public List<CardModifier> modifiers;
 	public List<Keyword> keywords;
-
 
 
 

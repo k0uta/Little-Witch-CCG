@@ -8,22 +8,20 @@ public class Condition {
 		Always_True,
 		Decision_By_Player,
 
-		Card_Is_Of_Type,
-		Number_Of_Card_Type_In_Play,
+		Card_Type_Is,
+		Card_Subtype_Is,
+		Number_Of_Card_Type_In_Play_Is,
 
 		Card_Name_Is,
-		Card_Name_In_Control,
+		Card_Name_In_Control_Is,
 		
-		Card_Name_On_Field,
-		Card_Creature_Type_On_Field,
-		Card_Creature_Type_On_Field_Count, // Adicionar um valueToCompare secundário pra esse funcionar
+		Card_Name_On_Field_Is,
+		Card_Subtype_On_Field_Is,
+		Card_Subtype_On_Field_Count_Is, // Adicionar um valueToCompare secundário pra esse funcionar
 
 		Card_Was_Played_From,
 
-		Card_Name_Is_Played,
-		Card_Type_Is_Played,
-
-		Card_Has_Mark,
+		Card_Mark_Is,
 
 		Card_Current_Power_Is,
 
@@ -42,6 +40,6 @@ public class Condition {
 		
 	public ConditionType type;
 	public CompareType compareType;
-	public string valueToCompare;
+	public string valuesToCompare;
 
 }
