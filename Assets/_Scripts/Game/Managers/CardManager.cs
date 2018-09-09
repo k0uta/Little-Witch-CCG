@@ -4,6 +4,19 @@ using UnityEngine;
 
 static public class CardManager {
 
+
+	static public InGameCard createNewInGameCard(GameObject cardObject, Card cardData){
+
+		var newCard = new InGameCard();
+
+		newCard.NameText.text = cardData.Name;
+		newCard.DescriptionText.text = cardData.Description;
+		newCard.EnergyLimitText.text = (string) cardData.energyLimit;
+
+		return GameObject.Instantiate (cardObject);
+
+
+	}
 	/*
 	static public Card Create_New_Card(string name,
 						string flavorText,
@@ -114,6 +127,7 @@ static public class CardManager {
 	}
 	*/
 
+	/*
 	static public bool Card_Was_Played_From(Card c, Card.CardPlayedFrom playedFrom){
 
 		return c.PlayedFrom == playedFrom;
@@ -135,6 +149,7 @@ static public class CardManager {
 		return c.Marks.Exists(x => x == mark);
 
 	}
+	*/
 
 	/*
 	static public bool Card_Current_Power_Is(Card c, int powerValue, Condition.CompareType compare){
@@ -155,6 +170,5 @@ static public class CardManager {
 
 	}
 	*/
-
 
 }

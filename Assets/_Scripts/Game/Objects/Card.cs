@@ -38,20 +38,10 @@ public class Card : ScriptableObject {
 		Legendary,
 	}
 
-	public enum CardPlayedFrom{
-		Hand,
-		Deck,
-		DiscardPile,
-	}
 
-	public enum CardMark{
-		Stunned,
-	}
 		
 	public int cardId;
 
-
-	public Sprite Art { get; set; }
 	public string Name { get; set; }
 	public string Description { get; set; }
 
@@ -62,12 +52,6 @@ public class Card : ScriptableObject {
 	public List<CardModifier> modifiers;
 	public List<Keyword> keywords;
 
-
-
-	//TODO: RUNTIME VARIABLES FOR IN-GAME CARD
-	public CardPlayedFrom PlayedFrom { get; set; }
-	public int CurrentEnergy { get; set; }
-	public List<CardMark> Marks { get; set; }
 
 
 }
