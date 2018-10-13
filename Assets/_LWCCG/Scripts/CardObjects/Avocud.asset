@@ -8,9 +8,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70a94ed3fd453fc4a87a5af53d8d3ada, type: 3}
+  m_Script: {fileID: 11500000, guid: a358588099007454997aed00d32e004c, type: 3}
   m_Name: Avocud
   m_EditorClassIdentifier: 
   title: Avocud
-  description: Hey its me, avocud!
+  description: Avocud go!
   artwork: {fileID: 21300000, guid: 43ddf0b7d6c4f6846abe9fb7d370f399, type: 3}
+  energyCapacity: 4

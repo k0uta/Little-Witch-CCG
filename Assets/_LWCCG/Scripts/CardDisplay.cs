@@ -17,7 +17,7 @@ namespace LWCCG
 
         public Image artworkImage;
 
-        void Start()
+        public virtual void Start()
         {
             titleText.text = card.title;
             descriptionText.text = card.description;

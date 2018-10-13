@@ -21,6 +21,9 @@ namespace LWCCG
         private GameObject cardPrefab;
 
         [SerializeField]
+        private GameObject creatureCardPrefab;
+
+        [SerializeField]
         private Transform targetDock;
 
         [SerializeField]
@@ -41,7 +44,17 @@ namespace LWCCG
         public void Draw()
         {
             Card card = deck.Draw();
-            GameObject cardObject = Instantiate(cardPrefab);
+
+            // FIXME: I don't like doing fabric work within model class
+            GameObject cardObject;
+            if (card is CreatureCard)
+            {
+                cardObject = Instantiate(creatureCardPrefab);
+            }
+            else
+            {
+                cardObject = Instantiate(cardPrefab);
+            }
             cardObject.name = card.title;
             cardObject.GetComponent<CardDisplay>().card = card;
 

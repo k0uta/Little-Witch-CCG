@@ -529,7 +529,10 @@ MonoBehaviour:
   baseDeck: {fileID: 11400000, guid: 6c61d64b38b885a4dbce029a9032ef23, type: 2}
   cardCountText: {fileID: 1474205728}
   cardPrefab: {fileID: 1872623056770810, guid: 95f428c7fcd0298428aa9f25d2ef2342, type: 2}
+  creatureCardPrefab: {fileID: 1299318786468508, guid: 9ba9b4aa53ef06844b5d8bf56e260fc4,
+    type: 2}
   targetDock: {fileID: 1303963016}
+  playerSlot: 0
 --- !u!1 &422294394
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,7 +756,10 @@ MonoBehaviour:
   baseDeck: {fileID: 11400000, guid: 6c61d64b38b885a4dbce029a9032ef23, type: 2}
   cardCountText: {fileID: 657142248}
   cardPrefab: {fileID: 1872623056770810, guid: 95f428c7fcd0298428aa9f25d2ef2342, type: 2}
+  creatureCardPrefab: {fileID: 1299318786468508, guid: 9ba9b4aa53ef06844b5d8bf56e260fc4,
+    type: 2}
   targetDock: {fileID: 953333253}
+  playerSlot: 1
 --- !u!114 &696460736
 MonoBehaviour:
   m_ObjectHideFlags: 0
