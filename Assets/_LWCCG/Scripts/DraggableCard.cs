@@ -39,9 +39,9 @@ namespace LWCCG
             GetComponent<CanvasGroup>().blocksRaycasts = !dragDisabled;
         }
 
-        public void Dock(Transform targetTransform)
+        public void Dock(CardDropZone dropZone)
         {
-            dockTransform = targetTransform;
+            dockTransform = dropZone.transform;
         }
 
         public void DisableDrag()

@@ -20,7 +20,7 @@ namespace LWCCG
                 return;
 
             // After everything
-            draggableCard.Dock(this.transform);
+            draggableCard.Dock(this);
             if (lockDrag)
             {
                 draggableCard.DisableDrag();

@@ -23,6 +23,9 @@ namespace LWCCG
         [SerializeField]
         private Transform targetDock;
 
+        [SerializeField]
+        private PlayerSlot playerSlot;
+
         void UpdateCardCount()
         {
             cardCountText.text = string.Format("Count: {0}", deck.cards.Count);
@@ -42,7 +45,10 @@ namespace LWCCG
             cardObject.name = card.title;
             cardObject.GetComponent<CardDisplay>().card = card;
 
-            cardObject.GetComponent<DraggableCard>().Dock(targetDock);
+            var draggableCard = cardObject.GetComponent<DraggableCard>();
+            cardObject.GetComponent<DraggableCard>().Dock(targetDock.GetComponent<CardDropZone>());
+            draggableCard.playerSlot = playerSlot;
+
             cardObject.transform.SetParent(targetDock);
         }
     }
