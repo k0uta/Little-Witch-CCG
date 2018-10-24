@@ -20,6 +20,13 @@ namespace LWCCG
             base.Start();
             creatureCard = ((CreatureCard)this.card);
             energyCap.text = creatureCard.energyCapacity.ToString();
+            UpdateEnergyAmount();
+
+            creatureCard.OnEnergize += UpdateEnergyAmount;
+        }
+
+        public void UpdateEnergyAmount()
+        {
             currentEnergy.text = creatureCard.Energy().ToString();
         }
     }

@@ -12,6 +12,9 @@ namespace LWCCG
 
         [SerializeField]
         private bool lockDrag;
+
+        private bool energizing;
+
         public void OnDrop(PointerEventData eventData)
         {
             DraggableCard draggableCard = eventData.pointerDrag.GetComponent<DraggableCard>();
@@ -20,6 +23,9 @@ namespace LWCCG
                 return;
 
             // After everything
+            if (draggableCard.dragDisabled)
+                return;
+
             draggableCard.Dock(this);
             if (lockDrag)
             {
@@ -35,6 +41,16 @@ namespace LWCCG
         public void OnPointerExit(PointerEventData eventData)
         {
             // throw new System.NotImplementedException();
+        }
+
+        public void ToggleEnergizing()
+        {
+            energizing = !energizing;
+        }
+
+        public bool Energizing()
+        {
+            return energizing;
         }
     }
 }

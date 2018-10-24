@@ -10,19 +10,22 @@ namespace LWCCG
         Player1,
         Player2
     }
-    public class DraggableCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public class DraggableCard : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerClickHandler
     {
+        public bool dragDisabled;
 
-        private Transform dockTransform;
-
-        private bool dragDisabled;
+        private CardDropZone dropZone;
 
         [SerializeField]
         public PlayerSlot playerSlot { get; set; }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            dockTransform = this.transform.parent;
+            if (dragDisabled)
+            {
+                return;
+            }
+
             this.transform.SetParent(this.transform.root);
 
             GetComponent<CanvasGroup>().blocksRaycasts = false;
@@ -30,23 +33,55 @@ namespace LWCCG
 
         public void OnDrag(PointerEventData eventData)
         {
+            if (dragDisabled)
+            {
+                return;
+            }
             this.transform.position = eventData.position;
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            this.transform.SetParent(dockTransform);
-            GetComponent<CanvasGroup>().blocksRaycasts = !dragDisabled;
+            if (dragDisabled)
+            {
+                return;
+            }
+            this.transform.SetParent(dropZone.transform);
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
-        public void Dock(CardDropZone dropZone)
+        public void Dock(CardDropZone targetDropZone)
         {
-            dockTransform = dropZone.transform;
+            dropZone = targetDropZone;
+            this.transform.SetParent(dropZone.transform);
+            GetComponent<CanvasGroup>().blocksRaycasts = true;
         }
 
         public void DisableDrag()
         {
             dragDisabled = true;
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log("OnPointerClick");
+            if (!dropZone.Energizing())
+            {
+                Debug.Log("Not Energizing");
+                return;
+            }
+
+            var card = this.GetComponent<CardDisplay>().card;
+            if (!(card is CreatureCard))
+            {
+                Debug.Log("Not Creature");
+                return;
+            }
+
+            Debug.Log("Energizing");
+            ((CreatureCard)card).Energize();
+
+            dropZone.ToggleEnergizing();
         }
     }
 }

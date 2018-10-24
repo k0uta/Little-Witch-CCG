@@ -37,6 +37,7 @@ namespace LWCCG
         void Start()
         {
             deck = Instantiate(baseDeck);
+            deck.SpawnCards();
             deck.OnDeckUpdate += UpdateCardCount;
             deck.Shuffle();
         }

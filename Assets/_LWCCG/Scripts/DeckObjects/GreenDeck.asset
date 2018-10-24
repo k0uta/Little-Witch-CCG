@@ -12,44 +12,9 @@ MonoBehaviour:
   m_Name: GreenDeck
   m_EditorClassIdentifier: 
   title: Green Deck
-  cards:
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
-  - {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
+  cards: []
+  cardList:
+  - card: {fileID: 11400000, guid: 7f75b8595db98664ca5197b353e93ac4, type: 2}
+    quantity: 20
+  - card: {fileID: 11400000, guid: 321e81c91c25e7743b78dd640497b17a, type: 2}
+    quantity: 15
